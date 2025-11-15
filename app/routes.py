@@ -15,10 +15,14 @@ def gallery():
         images = json.load(f)
     return render_template("gallery.html", images=images)
 
+@main.route("/admin")
+def admin():
+    return render_template("admin.html")
+
 @main.route("/dbcheck")
 def dbcheck():
     try:
-        response = supabase.table('Project').select('*').limit(1).execute()
+        response = supabase.table('project').select('*').limit(1).execute()
         if response.data is not None:
             return f"Connected to Supabase! {response.data}"
         else:
